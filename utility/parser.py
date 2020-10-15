@@ -1,11 +1,12 @@
-'''
+"""
 Created on Oct 10, 2018
 Tensorflow Implementation of Neural Graph Collaborative Filtering (NGCF) model in:
 Wang Xiang et al. Neural Graph Collaborative Filtering. In SIGIR 2019.
 
 @author: Xiang Wang (xiangwang@u.nus.edu)
-'''
+"""
 import argparse
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Run NGCF.")
@@ -23,7 +24,7 @@ def parse_args():
     parser.add_argument('--verbose', type=int, default=1,
                         help='Interval of evaluation.')
     parser.add_argument('--is_norm', type=int, default=1,
-                    help='Interval of evaluation.')
+                        help='Interval of evaluation.')
     parser.add_argument('--epoch', type=int, default=1000,
                         help='Number of epoch.')
 
@@ -39,12 +40,10 @@ def parse_args():
     parser.add_argument('--lr', type=float, default=0.01,
                         help='Learning rate.')
 
-    parser.add_argument('--model_type', nargs='?', default='lightgcn',
-                        help='Specify the name of model (lightgcn).')
-    parser.add_argument('--adj_type', nargs='?', default='pre',
+    parser.add_argument('--adj_type', nargs='?', default='mean',
                         help='Specify the type of the adjacency (laplacian) matrix from {plain, norm, mean}.')
     parser.add_argument('--alg_type', nargs='?', default='lightgcn',
-                        help='Specify the type of the graph convolutional layer from {ngcf, gcn, gcmc}.')
+                        help='Specify the type of the graph convolutional layer from {lightgcn, ngcf, gcn, gcmc}.')
 
     parser.add_argument('--gpu_id', type=int, default=0,
                         help='0 for NAIS_prod, 1 for NAIS_concat')

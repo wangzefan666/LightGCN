@@ -29,7 +29,7 @@ The instruction of commands has been clearly stated in the codes (see the parser
 ### Gowalla dataset
 * Command
 ```
-python LightGCN.py --dataset gowalla --regs [1e-4] --embed_size 64 --layer_size [64,64,64] --lr 0.001 --batch_size 2048 --epoch 1000
+python main.py --dataset gowalla --regs [1e-4] --embed_size 64 --layer_size [64,64,64] --lr 0.001 --batch_size 2048 --epoch 1000
 ```
 * Output log :
 ```
@@ -50,7 +50,7 @@ Best Iter=[38]@[32829.6]	recall=[0.18236], precision=[0.05607], ndcg=[0.15539]
 ### Yelp2018 dataset
 * Command
 ```
-python LightGCN.py --dataset yelp2018 --regs [1e-4] --embed_size 64 --layer_size [64,64,64] --lr 0.001 --batch_size 2048 --epoch 1000
+python main.py --dataset yelp2018 --regs [1e-4] --embed_size 64 --layer_size [64,64,64] --lr 0.001 --batch_size 2048 --epoch 1000
 ```
 * Output log :
 ```
