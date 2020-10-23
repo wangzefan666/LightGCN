@@ -40,8 +40,8 @@ def parse_args():
     parser.add_argument('--lr', type=float, default=0.01,
                         help='Learning rate.')
 
-    parser.add_argument('--adj_type', nargs='?', default='mean',
-                        help='Specify the type of the adjacency (laplacian) matrix from {plain, norm, mean}.')
+    parser.add_argument('--adj_type', nargs='?', default='sym',
+                        help='Specify the type of the adjacency (laplacian) matrix from {plain, norm, mean, sym}.')
     parser.add_argument('--alg_type', nargs='?', default='lightgcn',
                         help='Specify the type of the graph convolutional layer from {lightgcn, ngcf, gcn, gcmc}.')
 
