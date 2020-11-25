@@ -257,7 +257,7 @@ if __name__ == '__main__':
                                       feed_dict={model.train_loss: loss, model.train_mf_loss: mf_loss,
                                                  model.train_emb_loss: emb_loss, model.train_reg_loss: reg_loss})
         train_writer.add_summary(summary_train_loss, epoch)
-        if np.isnan(loss) == True:
+        if np.isnan(loss):
             print('ERROR: loss is nan.')
             sys.exit()
 
@@ -341,7 +341,7 @@ if __name__ == '__main__':
 
         # *********************************************************
         # early stopping when cur_best_pre_0 is decreasing for ten successive steps.
-        if should_stop == True:
+        if should_stop:
             break
 
         # *********************************************************

@@ -126,8 +126,8 @@ class LightGCN(object):
         *********************************************************
         Inference for the testing phase.
         """
-        self.batch_ratings = tf.matmul(self.u_g_embeddings, self.pos_i_g_embeddings, transpose_a=False,
-                                       transpose_b=True)
+        self.batch_ratings = tf.matmul(self.u_g_embeddings, self.pos_i_g_embeddings, transpose_a=False, transpose_b=True)
+
 
         """
         *********************************************************
@@ -178,6 +178,25 @@ class LightGCN(object):
                 initializer([self.weight_size_list[k], self.weight_size_list[k + 1]]), name='W_mlp_%d' % k)
             all_weights['b_mlp_%d' % k] = tf.Variable(
                 initializer([1, self.weight_size_list[k + 1]]), name='b_mlp_%d' % k)
+
+        self.ecc_hid = 256
+        self.ecc_n_layers = 3
+        for l in range(self.ecc_n_layers):
+            if l == 0:
+                all_weights['W_ecc_%d' % l] = tf.Variable(
+                    initializer([self.ecc_n_layers ** 2 * self.emb_dim, self.ecc_hid]), name='W_ecc_%d' % l)
+                all_weights['b_ecc_%d' % l] = tf.Variable(
+                    initializer([1, self.ecc_hid]), name='b_ecc_%d' % l)
+            elif l == self.ecc_n_layers - 1:
+                all_weights['W_ecc_%d' % l] = tf.Variable(
+                    initializer([self.ecc_hid, 1]), name='W_ecc_%d' % l)
+                all_weights['b_ecc_%d' % l] = tf.Variable(
+                    initializer([1, 1]), name='b_ecc_%d' % l)
+            else:
+                all_weights['W_ecc_%d' % l] = tf.Variable(
+                    initializer([self.ecc_hid, self.ecc_hid]), name='W_ecc_%d' % l)
+                all_weights['b_ecc_%d' % l] = tf.Variable(
+                    initializer([1, self.ecc_hid]), name='b_ecc_%d' % l)
 
         return all_weights
 
@@ -236,6 +255,7 @@ class LightGCN(object):
         all_embeddings = tf.reduce_mean(all_embeddings, axis=1, keepdims=False)
         u_g_embeddings, i_g_embeddings = tf.split(all_embeddings, [self.n_users, self.n_items], 0)
         return u_g_embeddings, i_g_embeddings
+
 
     def _create_ngcf_embed(self):
         if self.node_dropout_flag:

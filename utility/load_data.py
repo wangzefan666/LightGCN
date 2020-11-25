@@ -81,7 +81,7 @@ class Data(object):
             adj_mat = sp.load_npz(self.path + '/s_adj_mat.npz')
             norm_adj_mat = sp.load_npz(self.path + '/s_norm_adj_mat.npz')
             mean_adj_mat = sp.load_npz(self.path + '/s_mean_adj_mat.npz')
-            pre_adj_mat = sp.load_npz(self.path + '/s_sym_adj_mat.npz')
+            sym_adj_mat = sp.load_npz(self.path + '/s_sym_adj_mat.npz')
             print('already load adj matrix', adj_mat.shape, time() - t1)
 
         except Exception:
@@ -235,7 +235,7 @@ class Data(object):
         print('n_users=%d, n_items=%d' % (self.n_users, self.n_items))
         print('n_interactions=%d' % (self.n_train + self.n_test))
         print('n_train=%d, n_test=%d, sparsity=%.5f' % (
-        self.n_train, self.n_test, (self.n_train + self.n_test) / (self.n_users * self.n_items)))
+            self.n_train, self.n_test, (self.n_train + self.n_test) / (self.n_users * self.n_items)))
 
     def get_sparsity_split(self):
         try:
